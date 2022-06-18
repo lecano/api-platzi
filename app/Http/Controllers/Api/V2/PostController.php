@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V2;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\PostResource;
+use App\Http\Resources\V2\PostCollection;
+use App\Http\Resources\V2\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,18 @@ class PostController extends Controller
     public function index()
     {
         //
-        return PostResource::collection(Post::latest()->paginate());
+        return new PostCollection(Post::latest()->paginate());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
     /**
@@ -33,6 +45,18 @@ class PostController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Post $post)
+    {
+        //
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Post  $post
@@ -41,8 +65,5 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
-        $post->delete();
-
-        return response()->json([], 204);
     }
 }

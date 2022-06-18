@@ -20,7 +20,12 @@ class Post extends Model
     protected function PublishedAt(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->created_at->diffForHumans(),
+            get: fn () => $this->created_at->format('Y-m-d'),
         );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
